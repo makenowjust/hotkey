@@ -83,6 +83,7 @@ func Start() <-chan error {
 	chErr := make(chan error)
 
 	go func() {
+		// 
 		count := 0
 		for _, reserved := range reservedHotKeys {
 			if reserved.id == 0 {
@@ -97,6 +98,7 @@ func Start() <-chan error {
 			count += 1
 		}
 
+		// hotkey's loop
 		for {
 			select {
 			case <-time.After(time.Millisecond * 10):
