@@ -83,7 +83,7 @@ func Start() <-chan error {
 	chErr := make(chan error)
 
 	go func() {
-		// 
+		// register and reserve to unregister hotkeys
 		count := 0
 		for _, reserved := range reservedHotKeys {
 			if reserved.id == 0 {
