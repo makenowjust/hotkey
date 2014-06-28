@@ -42,6 +42,10 @@ func main() {
 
 and run `go run minimal.go`
 
+##Document
+
+See <https://godoc.org/github.com/MakeNowJust/hotkey>.
+
 ##License
 
 This software is released under the MIT License, see LICENSE.
