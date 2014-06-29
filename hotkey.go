@@ -1,3 +1,7 @@
+// Copyright (c) 2014 TSUYUSATO Kitsune
+// This software is released under the MIT License.
+// http://opensource.org/licenses/mit-license.php
+
 // Package hotkey provides HotKey for Go Language.
 package hotkey
 

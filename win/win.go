@@ -1,3 +1,7 @@
+// Copyright (c) 2014 TSUYUSATO Kitsune
+// This software is released under the MIT License.
+// http://opensource.org/licenses/mit-license.php
+
 // Package hotkey_win is win32api wrapper for hotkey.
 package hotkey_win
 
