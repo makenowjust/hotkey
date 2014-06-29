@@ -47,7 +47,9 @@ var (
 )
 
 // Register a hotkey with modifiers and vk.
-// mods are hotkey's modifiers such as hotkey.Alt, hotkey.Ctrl|hotkey.Shift.
+//
+// mods are hotkey's modifiers such as hotkey.Alt, hotkey.Ctrl+hotkey.Shift.
+//
 // vk is a hotkey's virtual key code. See also
 // http://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
 func Register(mods Modifier, vk uint32, handle func()) (id Id, err error) {
