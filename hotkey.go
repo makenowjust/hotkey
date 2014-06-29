@@ -88,6 +88,9 @@ func Unregister(id Id) {
 }
 
 // Start hotkey's loop. It is non-blocking.
+//
+// The returned channel notices finish hotkey's loop.
+// If occured error in hotkey's loop, it send error object.
 func Start() <-chan error {
 	chErr := make(chan error)
 	chThreadId := make(chan uint32)
