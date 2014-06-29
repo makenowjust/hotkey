@@ -1,3 +1,4 @@
+// Package hotkey_win is win32api wrapper for hotkey.
 package hotkey_win
 
 import (

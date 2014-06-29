@@ -1,3 +1,4 @@
+// Package hotkey provides HotKey for Go Language.
 package hotkey
 
 import (
