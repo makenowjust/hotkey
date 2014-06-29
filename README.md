@@ -2,12 +2,18 @@
 
 ##About
 
-This library add HotKey in your Go Programming Language program on Windows.
-(includes win32api wrapper of `RegisterHotKey` and `UnregisterHotKey`)
+This library provides HotKey for Go Language on Windows.
+(includes win32api wrapper of `RegisterHotKey`, `UnregisterHotKey` and more)
 
 ##Get Started
 
 Now run `go get github.com/MakeNowJust/hotkey`.
+
+##Import
+
+```go
+import "github.com/MakeNowJust/hotkey"
+```
 
 ##Using
 
@@ -41,6 +47,8 @@ func main() {
 ```
 
 and run `go run minimal.go`
+
+More examples exists `example` directory. Let's see.
 
 ##Document
 
