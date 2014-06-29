@@ -8,6 +8,7 @@ package hotkey
 import (
 	"fmt"
 	"time"
+	"runtime"
 
 	"github.com/lxn/win"
 )
@@ -96,6 +97,8 @@ func Start() <-chan error {
 	chThreadId := make(chan uint32)
 
 	go func() {
+		runtime.LockOSThread()
+		
 		// register and reserve to unregister hotkeys
 		count := 0
 		for _, reserved := range reservedHotKeys {
