@@ -5,31 +5,31 @@
 package hotkey
 
 var (
-	MockRegister   func (fsModifers, vk uint32, handle func ()) (Id, error)
-	MockUnregister func (id int32)
-	MockStop       func ()
-	MockIsStop     func () bool
+	MockRegister   func(fsModifers, vk uint32, handle func()) (Id, error)
+	MockUnregister func(id int32)
+	MockStop       func()
+	MockIsStop     func() bool
 )
 
 func init() {
-	newServer = func () server {
-		svr := mockServer{ MockRegister, MockUnregister, MockStop, MockIsStop }
-		MockRegister   = nil
+	newServer = func() server {
+		svr := mockServer{MockRegister, MockUnregister, MockStop, MockIsStop}
+		MockRegister = nil
 		MockUnregister = nil
-		MockStop       = nil
-		MockIsStop     = nil
+		MockStop = nil
+		MockIsStop = nil
 		return &svr
 	}
 }
 
 type mockServer struct {
-	mockRegister   func (fsModifiers, vk uint32, handle func ()) (Id, error)
-	mockUnregister func (id int32)
-	mockStop       func ()
-	mockIsStop     func () bool
+	mockRegister   func(fsModifiers, vk uint32, handle func()) (Id, error)
+	mockUnregister func(id int32)
+	mockStop       func()
+	mockIsStop     func() bool
 }
 
-func (mock *mockServer) register(fsModifiers, vk uint32, handle func ()) (id Id, err error) {
+func (mock *mockServer) register(fsModifiers, vk uint32, handle func()) (id Id, err error) {
 	if mock.mockRegister != nil {
 		id, err = mock.mockRegister(fsModifiers, vk, handle)
 	}

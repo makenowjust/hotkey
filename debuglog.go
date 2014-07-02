@@ -13,4 +13,3 @@ func (d debugT) Log(fmt string, args ...interface{}) {
 		log.Printf(fmt, args...)
 	}
 }
-

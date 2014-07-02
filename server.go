@@ -13,7 +13,6 @@ import (
 
 import "github.com/MakeNowJust/hotkey/win"
 
-
 type server interface {
 	register(fsModifiers, vk uint32, handle func()) (Id, error)
 	unregister(id int32)
@@ -31,12 +30,12 @@ const (
 )
 
 type message struct {
-	msgType int
-	id int32
+	msgType         int
+	id              int32
 	fsModifiers, vk uint32
 
 	// Channels as result notifier
-	chId chan Id
+	chId  chan Id
 	chErr chan error
 }
 
@@ -53,9 +52,9 @@ type serverImpl struct {
 }
 
 // Hotkey's id manager. It is thread safe.
-var globalId	 = func () (<-chan int32) {
+var globalId = func() <-chan int32 {
 	globalId := make(chan int32, 1)
-	go func () {
+	go func() {
 		for i := int32(1); ; i++ {
 			globalId <- i
 		}
@@ -64,7 +63,7 @@ var globalId	 = func () (<-chan int32) {
 }()
 
 // For test
-var newServer = func () server {
+var newServer = func() server {
 	svr := new(serverImpl)
 	svr.chMsg = make(chan *message, 100)
 	svr.id2handle = make(map[Id]func())
@@ -72,7 +71,7 @@ var newServer = func () server {
 
 	chThreadId := make(chan uint32)
 	svr.debug.Log("Start hotkey's loop")
-	go func () {
+	go func() {
 		svr.debug.Log("Lock thread for win32api")
 		runtime.LockOSThread()
 
@@ -94,7 +93,7 @@ var newServer = func () server {
 						msg.chErr <- fmt.Errorf("failed to register hotkey {mods=%d, vk=%d}", msg.fsModifiers, msg.vk)
 						break
 					}
-					defer func () {
+					defer func() {
 						svr.debug.Log("defer Unregister", id)
 						hotkey_win.UnregisterHotKey(0, id)
 					}()
@@ -157,11 +156,11 @@ func (svr *serverImpl) register(fsModifiers, vk uint32, handle func()) (id Id, e
 	}
 
 	var msg message
-	msg.msgType     = msgRegister
+	msg.msgType = msgRegister
 	msg.fsModifiers = fsModifiers
-	msg.vk          = vk
+	msg.vk = vk
 
-	msg.chId  = make(chan Id)
+	msg.chId = make(chan Id)
 	msg.chErr = make(chan error)
 
 	svr.chMsg <- &msg
@@ -184,7 +183,7 @@ func (svr *serverImpl) unregister(id int32) {
 
 	var msg message
 	msg.msgType = msgUnregister
-	msg.id      = id
+	msg.id = id
 
 	msg.chErr = make(chan error)
 

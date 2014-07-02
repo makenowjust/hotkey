@@ -12,21 +12,20 @@ import "github.com/MakeNowJust/hotkey"
 
 type testRegister struct {
 	fsModifiers hotkey.Modifier
-	vk uint32
+	vk          uint32
 }
 
-var	registers = []testRegister {
-	{hotkey.Ctrl , 'A'},
-	{hotkey.Ctrl+hotkey.Alt , 'B'},
+var registers = []testRegister{
+	{hotkey.Ctrl, 'A'},
+	{hotkey.Ctrl + hotkey.Alt, 'B'},
 	{hotkey.Shift, 'C'},
-	{hotkey.Shift*hotkey.Win, 'D'},
-	{hotkey.Win  , hotkey.F1},
+	{hotkey.Shift * hotkey.Win, 'D'},
+	{hotkey.Win, hotkey.F1},
 }
-
 
 func TestRegister(t *testing.T) {
 	count := 0
-	hotkey.MockRegister = func (fsModifiers, vk uint32, handle func ()) (hotkey.Id, error) {
+	hotkey.MockRegister = func(fsModifiers, vk uint32, handle func()) (hotkey.Id, error) {
 		if reg := registers[count]; reg.fsModifiers != hotkey.Modifier(fsModifiers) || reg.vk != vk {
 			t.Errorf("unexpected to register call (%d, %d)", fsModifiers, vk)
 		}
@@ -36,7 +35,7 @@ func TestRegister(t *testing.T) {
 
 	man := hotkey.New()
 	for _, reg := range registers {
-		man.Register(reg.fsModifiers, reg.vk, func () {
+		man.Register(reg.fsModifiers, reg.vk, func() {
 			// nothing
 		})
 	}
@@ -48,7 +47,7 @@ func TestRegister(t *testing.T) {
 func TestUnregister(t *testing.T) {
 	ids := make([]hotkey.Id, len(registers)/2)
 	count := 0
-	hotkey.MockRegister = func (fsModifiers, vk uint32, handle func ()) (hotkey.Id, error) {
+	hotkey.MockRegister = func(fsModifiers, vk uint32, handle func()) (hotkey.Id, error) {
 		if reg := registers[count]; reg.fsModifiers != hotkey.Modifier(fsModifiers) || reg.vk != vk {
 			t.Errorf("unexpected to register call (%d, %d)", fsModifiers, vk)
 		}
@@ -56,7 +55,7 @@ func TestUnregister(t *testing.T) {
 		return hotkey.Id(count), nil
 	}
 	idx1 := 0
-	hotkey.MockUnregister = func (id int32) {
+	hotkey.MockUnregister = func(id int32) {
 		if ids[idx1] != hotkey.Id(id) {
 			t.Errorf("unexpected to unregister call (%d)", id)
 		}
@@ -66,7 +65,7 @@ func TestUnregister(t *testing.T) {
 	idx2 := 0
 	man := hotkey.New()
 	for _, reg := range registers {
-		id, _ := man.Register(reg.fsModifiers, reg.vk, func () {
+		id, _ := man.Register(reg.fsModifiers, reg.vk, func() {
 			// nothing
 		})
 		if idx2 < len(ids) {
@@ -82,6 +81,6 @@ func TestUnregister(t *testing.T) {
 		man.Unregister(id)
 	}
 	if idx1 != idx2 {
-		t.Error("no enough to call count unregister")		
+		t.Error("no enough to call count unregister")
 	}
 }

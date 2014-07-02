@@ -13,18 +13,18 @@ func ExampleRegister() {
 	hkey := hotkey.New()
 
 	// Register Ctrl-A
-	hkey.Register(hotkey.Ctrl, 'A', func () {
+	hkey.Register(hotkey.Ctrl, 'A', func() {
 		// Here is a callback of HotKey Ctrl-A
 		fmt.Println("Ctrl-A")
 	})
 
 	// Register Ctrl-Alt-B
-	hkey.Register(hotkey.Ctrl+hotkey.Alt, 'B', func () {
+	hkey.Register(hotkey.Ctrl+hotkey.Alt, 'B', func() {
 		fmt.Println("Ctrl-Alt-B")
 	})
 
 	// Register Shift-Win-F1
-	hkey.Register(hotkey.Shift+hotkey.Win, hotkey.F1, func () {
+	hkey.Register(hotkey.Shift+hotkey.Win, hotkey.F1, func() {
 		fmt.Println("Shift-Win-F1")
 	})
 }
@@ -34,10 +34,8 @@ func ExampleUnregister() {
 
 	// Register Ctrl-A. This callback will call only once.
 	var id hotkey.Id
-	id, _ = hkey.Register(hotkey.Ctrl, 'A', func () {
+	id, _ = hkey.Register(hotkey.Ctrl, 'A', func() {
 		fmt.Println("Ctrl-A")
 		hkey.Unregister(id)
 	})
 }
-
-
