@@ -6,7 +6,7 @@
 
 ##Document
 
-[![godoc Reference](https://godoc.org/github.com/MakeNowJust/hotkey?status.png)][https://godoc.org/github.com/MakeNowJust/hotkey]
+[![godoc Reference](https://godoc.org/github.com/MakeNowJust/hotkey?status.png)](https://godoc.org/github.com/MakeNowJust/hotkey)
 
 ##About
 
