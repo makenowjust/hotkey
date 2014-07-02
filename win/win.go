@@ -2,19 +2,14 @@
 // This software is released under the MIT License.
 // http://opensource.org/licenses/mit-license.php
 
+// +build windows
+
 // Package hotkey_win is win32api wrapper for hotkey.
 package hotkey_win
 
 import (
 	. "github.com/lxn/win"
 	"syscall"
-)
-
-const (
-	MOD_ALT     = 1
-	MOD_CONTROL = 2
-	MOD_SHIFT   = 4
-	MOD_WIN     = 8
 )
 
 var (
