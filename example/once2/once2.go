@@ -24,7 +24,7 @@ func registerLoop(str []rune, idx int, finish chan bool) {
 	if idx < len(str) {
 		registerOnce(hotkey.Ctrl, uint32(str[idx]), func() {
 			fmt.Printf("Push Ctrl-%c\n", str[idx])
-			registerLoop(str, idx+1)
+			registerLoop(str, idx+1, finish)
 		})
 	} else {
 		finish <- true
