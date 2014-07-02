@@ -31,7 +31,7 @@ import (
 )
 
 func main() {
-  hkey := hotkey.New()
+	hkey := hotkey.New()
 
 	quit := make(chan bool)
 
