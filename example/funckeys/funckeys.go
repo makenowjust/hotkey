@@ -11,8 +11,10 @@ import (
 )
 
 func main() {
+	hkey := hotkey.New()
+
 	for i := uint32(0); i < 12; i++ {
-		hotkey.Register(hotkey.Alt+hotkey.Shift, hotkey.F1+i, func(i uint32) func() {
+		hkey.Register(hotkey.Alt+hotkey.Shift, hotkey.F1+i, func(i uint32) func() {
 			return func() {
 				fmt.Printf("Push Alt-Shift-F%d\n", i)
 			}
@@ -20,11 +22,9 @@ func main() {
 	}
 
 	quit := make(chan bool)
-	hotkey.Register(hotkey.Ctrl, 'Q', func() {
+	hkey.Register(hotkey.Ctrl, 'Q', func() {
 		quit <- true
 	})
-
-	hotkey.Start()
 
 	fmt.Println(`
 Start hotkey's loop.

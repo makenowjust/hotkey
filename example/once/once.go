@@ -10,33 +10,36 @@ import (
 	"github.com/MakeNowJust/hotkey"
 )
 
+var hkey = hotkey.New()
+
 func registerOnce(mods hotkey.Modifier, vk uint32, handle func()) {
 	var id hotkey.Id
-	id, _ = hotkey.Register(mods, vk, func() {
+	id, _ = hkey.Register(mods, vk, func() {
 		handle()
-		hotkey.Unregister(id)
+		hkey.Unregister(id)
 	})
 }
 
 func main() {
+	quit := make(chan bool)
+
+	count := 0
 	for _, vk := range "QUIT" {
 		registerOnce(hotkey.Ctrl, uint32(vk), func(vk rune) func() {
 			return func() {
 				fmt.Printf("Push Ctrl-%c\n", vk)
+				if count += 1; count == 4 {
+					quit <- true
+				}
 			}
 		}(vk))
 	}
-
-	chErr := hotkey.Start()
 
 	fmt.Println(`
 Start hotkey's loop.
 Push Ctrl-Q, U, I and T to quit.
 `[1:])
 
-	if err := <-chErr; err != nil {
-		fmt.Println(err)
-		return
-	}
+	<-quit
 	fmt.Println("QUIT!")
 }
