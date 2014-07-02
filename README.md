@@ -1,5 +1,13 @@
 #hotkey
 
+##Build Status
+
+[![Build Status](https://drone.io/github.com/MakeNowJust/hotkey/status.png)](https://drone.io/github.com/MakeNowJust/hotkey/latest)
+
+##Document
+
+[![godoc Reference](https://godoc.org/github.com/MakeNowJust/hotkey?status.png)][https://godoc.org/github.com/MakeNowJust/hotkey]
+
 ##About
 
 This library provides HotKey for Go Language on Windows.
@@ -49,10 +57,6 @@ func main() {
 and run `go run minimal.go`
 
 More examples exists `example` directory. Let's see.
-
-##Document
-
-See <https://godoc.org/github.com/MakeNowJust/hotkey>.
 
 ##License
 
