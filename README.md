@@ -1,12 +1,4 @@
-#hotkey
-
-##Build Status
-
-[![Build Status](https://drone.io/github.com/MakeNowJust/hotkey/status.png)](https://drone.io/github.com/MakeNowJust/hotkey/latest)
-
-##Document
-
-[![godoc Reference](https://godoc.org/github.com/MakeNowJust/hotkey?status.png)](https://godoc.org/github.com/MakeNowJust/hotkey)
+#hotkey [![Build Status](https://drone.io/github.com/MakeNowJust/hotkey/status.png)](https://drone.io/github.com/MakeNowJust/hotkey/latest) [![godoc Reference](https://godoc.org/github.com/MakeNowJust/hotkey?status.png)](https://godoc.org/github.com/MakeNowJust/hotkey)
 
 ##About
 
