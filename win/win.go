@@ -8,72 +8,66 @@
 package hotkey_win
 
 import (
-	. "github.com/lxn/win"
-	"syscall"
+	"github.com/lxn/win"
+	"golang.org/x/sys/windows"
 )
 
 var (
-	libuser32   uintptr
-	libkernel32 uintptr
+	registerHotKey    *windows.LazyProc
+	unregisterHotKey  *windows.LazyProc
+	postThreadMessage *windows.LazyProc
 
-	registerHotKey    uintptr
-	unregisterHotKey  uintptr
-	postThreadMessage uintptr
-
-	getCurrentThread uintptr
-	getThreadId      uintptr
+	getCurrentThread *windows.LazyProc
+	getThreadId      *windows.LazyProc
 )
 
 func init() {
 	// Library
-	libuser32 = MustLoadLibrary("user32.dll")
-	libkernel32 = MustLoadLibrary("kernel32.dll")
+	libuser32 := windows.NewLazySystemDLL("user32.dll")
+	libkernel32 := windows.NewLazySystemDLL("kernel32.dll")
 
 	// Functions
-	registerHotKey = MustGetProcAddress(libuser32, "RegisterHotKey")
-	unregisterHotKey = MustGetProcAddress(libuser32, "UnregisterHotKey")
-	postThreadMessage = MustGetProcAddress(libuser32, "PostThreadMessageW")
+	registerHotKey = libuser32.NewProc("RegisterHotKey")
+	unregisterHotKey = libuser32.NewProc("UnregisterHotKey")
+	postThreadMessage = libuser32.NewProc("PostThreadMessageW")
 
-	getCurrentThread = MustGetProcAddress(libkernel32, "GetCurrentThread")
-	getThreadId = MustGetProcAddress(libkernel32, "GetThreadId")
+	getCurrentThread = libkernel32.NewProc("GetCurrentThread")
+	getThreadId = libkernel32.NewProc("GetThreadId")
 }
 
-func RegisterHotKey(hwnd HWND, id int32, fsModifiers, vk uint32) bool {
-	ret, _, _ := syscall.Syscall6(registerHotKey, 4,
+func RegisterHotKey(hwnd win.HWND, id int32, fsModifiers, vk uint32) bool {
+	ret, _, _ := registerHotKey.Call(
 		uintptr(hwnd),
 		uintptr(id),
 		uintptr(fsModifiers),
-		uintptr(vk),
-		0, 0)
+		uintptr(vk))
 
 	return ret != 0
 }
 
 func PostThreadMessage(idThread uint32, msg uint32, wParam, lParam int32) bool {
-	ret, _, _ := syscall.Syscall6(postThreadMessage, 4,
+	ret, _, _ := postThreadMessage.Call(
 		uintptr(idThread),
 		uintptr(msg),
 		uintptr(wParam),
-		uintptr(lParam),
-		0, 0)
+		uintptr(lParam))
 	return ret != 0
 }
 
-func UnregisterHotKey(hwnd HWND, id int32) bool {
-	ret, _, _ := syscall.Syscall(unregisterHotKey, 2,
+func UnregisterHotKey(hwnd win.HWND, id int32) bool {
+	ret, _, _ := unregisterHotKey.Call(
 		uintptr(hwnd),
-		uintptr(id),
-		0)
+		uintptr(id))
 
 	return ret != 0
 }
 
-func GetCurrentThread() HANDLE {
-	ret, _, _ := syscall.Syscall(getCurrentThread, 0, 0, 0, 0)
-	return HANDLE(ret)
+func GetCurrentThread() win.HANDLE {
+	ret, _, _ := getCurrentThread.Call()
+	return win.HANDLE(ret)
 }
 
-func GetThreadId(thread HANDLE) uint32 {
-	ret, _, _ := syscall.Syscall(getThreadId, 1, uintptr(thread), 0, 0)
+func GetThreadId(thread win.HANDLE) uint32 {
+	ret, _, _ := getThreadId.Call(uintptr(thread))
 	return uint32(ret)
 }
