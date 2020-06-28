@@ -15,6 +15,7 @@ type Modifier uint32
 
 // These are all members of hotkey.Modifier.
 const (
+	None  Modifier = hotkey_win.MOD_NONE
 	Alt   Modifier = hotkey_win.MOD_ALT
 	Ctrl  Modifier = hotkey_win.MOD_CONTROL
 	Shift Modifier = hotkey_win.MOD_SHIFT

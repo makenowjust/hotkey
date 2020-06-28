@@ -5,6 +5,7 @@
 package hotkey_win
 
 const (
+	MOD_NONE    = 0
 	MOD_ALT     = 1
 	MOD_CONTROL = 2
 	MOD_SHIFT   = 4
