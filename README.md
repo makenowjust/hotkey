@@ -1,25 +1,24 @@
-#hotkey [![Build Status](https://drone.io/github.com/MakeNowJust/hotkey/status.png)](https://drone.io/github.com/MakeNowJust/hotkey/latest) [![godoc Reference](https://godoc.org/github.com/MakeNowJust/hotkey?status.png)](https://godoc.org/github.com/MakeNowJust/hotkey)
+# hotkey [![Go Reference](https://pkg.go.dev/badge/github.com/MakeNowJust/hotkey.svg)](https://pkg.go.dev/github.com/MakeNowJust/hotkey)
 
-##About
+## About
 
-This library provides HotKey for Go Language on Windows.
-(includes win32api wrapper of `RegisterHotKey`, `UnregisterHotKey` and more)
+This library provides HotKey for Go Language on Windows (including win32api wrapper, such as `RegisterHotKey`, `UnregisterHotKey`).
 
-##Get Started
+## Get Started
 
-Now run `go get github.com/MakeNowJust/hotkey`.
+```console
+$ go get github.com/MakeNowJust/hotkey
+```
 
-##Import
+## Import
 
 ```go
 import "github.com/MakeNowJust/hotkey"
 ```
 
-##Using
+## Usage
 
-Such a minimal example:
-
-`minimal.go`
+The below is a minimal example.
 
 ```go
 package main
@@ -46,11 +45,11 @@ func main() {
 }
 ```
 
-and run `go run minimal.go`
+Let's see the [`example/`](example/) for more examples.
 
-More examples exists `example` directory. Let's see.
+## License
 
-##License
+This software is released under the MIT License.
+<http://opensource.org/licenses/mit-license.php>
 
-This software is released under the MIT License, see LICENSE.
-
+Copyright (c) 2014-2023 Hiroya Fujinami (a.k.a. TSUYUSATO "MakeNowJust" Kitsune)
